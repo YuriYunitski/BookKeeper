@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">BookKeeper</string>
+    <string name="currenc">RUB</string>
+    <string name="main_account">Сбережения</string>
+    <string name="limit">Суточный лимит</string>
+    <string name="remain">Остаток</string>
+    <string name="sum">Сумма</string>
+    <string name="zero">0</string>
+    <string name="apply">применить</string>
+    <string name="nullO">Обнулить</string>
+</resources>
