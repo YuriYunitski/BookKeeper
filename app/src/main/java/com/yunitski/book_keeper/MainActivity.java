@@ -12,7 +12,10 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
+<<<<<<< HEAD
 import android.text.InputFilter;
+=======
+>>>>>>> da1c0d6753bd08bf9b8aecd1b490b36b79ee4ab9
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -50,9 +53,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     ArrayList<String> arrayList;
     ArrayAdapter<String> arrayAdapter;
     DBHelper dbHelper;
+<<<<<<< HEAD
     int maxV = Integer.MAX_VALUE;
     int minV = 1;
 
+=======
+>>>>>>> da1c0d6753bd08bf9b8aecd1b490b36b79ee4ab9
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,6 +73,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         apply = findViewById(R.id.apply);
         apply.setOnClickListener(this);
         listView = findViewById(R.id.listHist);
+<<<<<<< HEAD
+=======
+        //arrayList = new ArrayList<String>();
+        //arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, arrayList);
+        //listView.setAdapter(arrayAdapter);
+>>>>>>> da1c0d6753bd08bf9b8aecd1b490b36b79ee4ab9
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, names);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -136,7 +148,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         keepsValue = Integer.parseInt(keeps.getText().toString());
         ContentValues cv = new ContentValues();
         SQLiteDatabase db = dbHelper.getWritableDatabase();
+<<<<<<< HEAD
         if (!etSum.getText().toString().isEmpty() && Integer.parseInt(etSum.getText().toString()) < Integer.MAX_VALUE) {
+=======
+        if (!etSum.getText().toString().isEmpty()) {
+>>>>>>> da1c0d6753bd08bf9b8aecd1b490b36b79ee4ab9
             int summ = Integer.parseInt(etSum.getText().toString());
             if (currentChoose.equals(names[1])) {
                 keepsValue += summ;
@@ -146,7 +162,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 String dd = dateC();
                 cv.put(InputData.TaskEntry.DATE, dd);
                 cv.put(InputData.TaskEntry.TOTAL_VALUE, keeps.getText().toString());
+<<<<<<< HEAD
                 cv.put(InputData.TaskEntry.VALUE, "" + summ);
+=======
+                cv.put(InputData.TaskEntry.VALUE, ""+summ);
+>>>>>>> da1c0d6753bd08bf9b8aecd1b490b36b79ee4ab9
                 cv.put(InputData.TaskEntry.OP_NAME, currentChoose);
                 db.insert(InputData.TaskEntry.TABLE, null, cv);
                 arrayAdapter.insert(listS, 0);
@@ -163,7 +183,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     String dd = dateC();
                     cv.put(InputData.TaskEntry.DATE, dd);
                     cv.put(InputData.TaskEntry.TOTAL_VALUE, keeps.getText().toString());
+<<<<<<< HEAD
                     cv.put(InputData.TaskEntry.VALUE, "" + summ);
+=======
+                    cv.put(InputData.TaskEntry.VALUE, ""+summ);
+>>>>>>> da1c0d6753bd08bf9b8aecd1b490b36b79ee4ab9
                     cv.put(InputData.TaskEntry.OP_NAME, currentChoose);
                     db.insert(InputData.TaskEntry.TABLE, null, cv);
                     arrayAdapter.insert(listS, 0);
@@ -230,6 +254,54 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         db.close();
     }
 
+<<<<<<< HEAD
+=======
+    public String historyOp(TextView totalValue, int value, String choose){
+        Calendar c = new GregorianCalendar();
+        int y = c.get(Calendar.YEAR);
+        int m = c.get(Calendar.MONTH) + 1;
+        int d = c.get(Calendar.DAY_OF_MONTH);
+        String dat = d + "." + m + "." + y;
+        String totVal = totalValue.getText().toString();
+        String val = ""+value;
+        String op = choose;
+        String s = dat + " " + totVal + " " + val + " " + op;
+        return s;
+    }
+    public String dateC(){
+        Calendar c = new GregorianCalendar();
+        int y = c.get(Calendar.YEAR);
+        int m = c.get(Calendar.MONTH) + 1;
+        int d = c.get(Calendar.DAY_OF_MONTH);
+        return d + "." + m + "." + y;
+    }
+
+    private void updateUI(){
+        arrayList = new ArrayList<>();
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        Cursor cursor = db.query(InputData.TaskEntry.TABLE, new String[]{InputData.TaskEntry._ID, InputData.TaskEntry.DATE, InputData.TaskEntry.TOTAL_VALUE, InputData.TaskEntry.VALUE, InputData.TaskEntry.OP_NAME}, null, null, null, null, null);
+        while (cursor.moveToNext()){
+            int idx = cursor.getColumnIndex(InputData.TaskEntry.DATE);
+            int idx1 = cursor.getColumnIndex(InputData.TaskEntry.TOTAL_VALUE);
+            int idx2 = cursor.getColumnIndex(InputData.TaskEntry.VALUE);
+            int idx3 = cursor.getColumnIndex(InputData.TaskEntry.OP_NAME);
+            arrayList.add(0, cursor.getString(idx) + " " + cursor.getString(idx3) + ": " + cursor.getString(idx2) + " Остаток: " + cursor.getString(idx1));
+        }
+        if (arrayAdapter == null) {
+            arrayAdapter = new ArrayAdapter<>(this,  android.R.layout.simple_expandable_list_item_1,
+                    arrayList);
+            listView.setAdapter(arrayAdapter);
+        } else {
+            arrayAdapter.clear();
+            arrayAdapter.addAll(arrayList);
+            arrayAdapter.notifyDataSetChanged();
+        }
+
+        cursor.close();
+        db.close();
+    }
+
+>>>>>>> da1c0d6753bd08bf9b8aecd1b490b36b79ee4ab9
     void save() {
         int keepInt = Integer.parseInt(keeps.getText().toString());
         int limitInt = Integer.parseInt(limit.getText().toString());
