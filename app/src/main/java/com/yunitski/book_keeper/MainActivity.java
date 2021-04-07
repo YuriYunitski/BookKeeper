@@ -97,6 +97,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        etSum.clearFocus();
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         menu.add(0, 0, 0, "Сбросить");
         return super.onCreateOptionsMenu(menu);
@@ -215,7 +221,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             int idx1 = cursor.getColumnIndex(InputData.TaskEntry.TOTAL_VALUE);
             int idx2 = cursor.getColumnIndex(InputData.TaskEntry.VALUE);
             int idx3 = cursor.getColumnIndex(InputData.TaskEntry.OP_NAME);
-            arrayList.add(0, cursor.getString(idx) + " " + cursor.getString(idx3) + ": " + cursor.getString(idx2) + " Остаток: " + cursor.getString(idx1));
+            arrayList.add(0, cursor.getString(idx) + " " + cursor.getString(idx3) + ": " + cursor.getString(idx2) + " Баланс: " + cursor.getString(idx1));
         }
         if (arrayAdapter == null) {
             arrayAdapter = new ArrayAdapter<>(this,  android.R.layout.simple_expandable_list_item_1,
